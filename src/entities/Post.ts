@@ -1,6 +1,8 @@
 import { Exclude, Expose } from 'class-transformer';
 import { BeforeInsert, Column, Index, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import BaseEntity from './Entity';
+import Sub from './Sub';
+import { User } from './User';
 
 export default class Post extends BaseEntity {
   @Index()
