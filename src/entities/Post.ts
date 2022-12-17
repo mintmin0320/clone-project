@@ -1,9 +1,13 @@
 import { Exclude, Expose } from 'class-transformer';
-import { BeforeInsert, Column, Index, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
+import { BeforeInsert, Column, Index, JoinColumn, ManyToOne, OneToMany, Entity } from 'typeorm';
+import { makeId, slugify } from '../utils/helpers';
+import Comment from './Commnet';
 import BaseEntity from './Entity';
 import Sub from './Sub';
 import { User } from './User';
+import Vote from './Vote';
 
+@Entity("posts")
 export default class Post extends BaseEntity {
   @Index()
   @Column()
@@ -30,7 +34,7 @@ export default class Post extends BaseEntity {
   user: User;
 
   @ManyToOne(() => Sub, (sub) => sub.posts)
-  @JoinColumn({ name: "Subname", referencedColumnName: "name" })
+  @JoinColumn({ name: "subname", referencedColumnName: "name" })
   sub: Sub;
 
   @Exclude()

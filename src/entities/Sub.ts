@@ -1,6 +1,7 @@
 import { Expose } from 'class-transformer';
-import { Column, Entity, Index, JoinColumn, ManyToOne } from 'typeorm';
+import { Column, Entity, Index, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import BaseEntity from './Entity';
+import Post from './Post';
 import { User } from './User';
 @Entity('subs')
 export default class Sub extends BaseEntity {
@@ -27,12 +28,14 @@ export default class Sub extends BaseEntity {
   @JoinColumn({ name: "username", referencedColumnName: "username" })
   user: User;
 
+  @OneToMany(() => Post, (post) => post.sub)
+  posts: Post[]
+
   @Expose()
   get imageUrl(): string {
     return this.imageUrn ? `localhost:4000/images/${this.imageUrn}` :
       "https://www.gravatar.com/avatar?d=mp&f=y"
   }
-
 
   @Expose()
   get bannerUrl(): string {
