@@ -3,7 +3,7 @@ import { Request, Response, Router } from 'express';
 import { isEmpty, validate } from "class-validator";
 import { User } from '../entities/User';
 const cookie = require('cookie');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 
 const mapError = (errors: Object[]) => {
   return errors.reduce((prev: any, err: any) => {

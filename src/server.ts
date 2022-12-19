@@ -2,6 +2,7 @@ import { AppDataSource } from './data-source';
 const express = require('express');
 const morgan = require('morgan');
 import authRoute from './routes/auth'
+import subsRoute from './routes/subs'
 const cors = require('cors');
 const dotenv = require('dotenv');
 
@@ -20,6 +21,7 @@ dotenv.config();
 app.get("/", (_, res) => res.send("running"));
 
 app.use("/api/auth", authRoute);
+app.use("/api/subs", subsRoute);
 
 app.listen(process.env.PORT, async () => {
   console.log(`server running at http//localhost:${process.env.PORT}`);
