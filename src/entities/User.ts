@@ -1,7 +1,8 @@
 import { IsEmail, IsPostalCode, Length } from 'class-validator'
 import { Entity, PrimaryGeneratedColumn, Column, Index, OneToMany, BeforeInsert } from "typeorm"
 import BaseEntity from './Entity';
-import bcrypt from 'bcryptjs'
+// import bcrypt from 'bcryptjs'
+const bcrypt = require('bcryptjs');
 import Post from './Post';
 import Vote from './Vote';
 
