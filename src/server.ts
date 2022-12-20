@@ -1,3 +1,4 @@
+import cookieParser = require('cookie-parser');
 import { AppDataSource } from './data-source';
 const express = require('express');
 const morgan = require('morgan');
@@ -16,6 +17,7 @@ app.use(cors({
 
 app.use(express.json())
 app.use(morgan('dev'));
+app.use(cookieParser());
 dotenv.config();
 
 app.get("/", (_, res) => res.send("running"));
