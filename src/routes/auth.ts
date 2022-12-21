@@ -2,6 +2,8 @@ const bcrypt = require('bcryptjs');
 import { Request, Response, Router } from 'express';
 import { isEmpty, validate } from "class-validator";
 import { User } from '../entities/User';
+import userMiddleware from "../middlewares/user"
+import authMiddleware from "../middlewares/auth"
 const cookie = require('cookie');
 const jwt = require('jsonwebtoken');
 
@@ -10,6 +12,10 @@ const mapError = (errors: Object[]) => {
     prev[err.property] = Object.entries(err.constraints)[0][1]
     return prev;
   }, {})
+}
+
+const me = async (_: Request, res: Response) => {
+  return res.json(res.locals.user);
 }
 
 const register = async (req: Request, res: Response) => {
@@ -96,6 +102,7 @@ const login = async (req: Request, res: Response) => {
 }
 
 const router = Router()
+router.get("/me", userMiddleware, authMiddleware, me);
 router.post("/register", register);
 router.post("/login", login);
 
